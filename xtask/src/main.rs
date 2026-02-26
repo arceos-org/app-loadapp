@@ -161,6 +161,7 @@ fn create_fat_disk_image(path: &Path) {
 /// Run cargo build for the target architecture.
 fn do_build(root: &Path, info: &ArchInfo) {
     let manifest = root.join("Cargo.toml");
+    let ax_config = root.join(".axconfig.toml");
     let status = Command::new("cargo")
         .args([
             "build",
@@ -172,6 +173,8 @@ fn do_build(root: &Path, info: &ArchInfo) {
             "--manifest-path",
             manifest.to_str().unwrap(),
         ])
+        // Ensure dependencies read the intended config regardless of subprocess cwd.
+        .env("AX_CONFIG_PATH", ax_config.to_str().unwrap())
         .status()
         .expect("failed to execute cargo build");
     if !status.success() {
