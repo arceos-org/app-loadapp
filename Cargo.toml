@@ -36,11 +36,11 @@ path = "xtask/src/main.rs"
 required-features = ["xtask"]
 
 [dependencies]
-axstd = { version = "0.2.2-preview.1", features = ["defplat", "alloc", "paging", "multitask", "sched-cfs"], optional = true }
+axstd = { version = "=0.3.0-preview.1", features = ["defplat", "alloc", "paging", "multitask", "sched-cfs"], optional = true }
 # Enable FS init in axruntime (bypasses broken arceos_api/fs)
-axfeat = { version = "0.2.2-preview.1", features = ["fs", "fs-fat"], optional = true }
+axfeat = { version = "=0.3.0-preview.1", features = ["fs"], optional = true }
 # Direct filesystem access API
-axfs = { version = "0.2.2-preview.1", features = ["fat"], optional = true }
+axfs = { version = "=0.3.0-preview.1", optional = true }
 # I/O traits (Read, Write, Seek)
 axio = { version = "0.3.0-pre.1", optional = true }
 

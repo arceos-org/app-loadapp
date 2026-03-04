@@ -14,7 +14,6 @@ extern crate axio;
 fn main() {
     #[cfg(feature = "axstd")]
     {
-        use axfs::ROOT_FS_CONTEXT;
         #[allow(unused_imports)]
         use axio::Read;
         use std::thread;
@@ -41,10 +40,9 @@ fn main() {
 
         fn load_app(fname: &str, buf: &mut [u8]) -> Result<usize, axio::Error> {
             println!("fname: {}", fname);
-            let ctx = ROOT_FS_CONTEXT.get().expect("Root FS not initialized");
-            let file = axfs::File::open(ctx, fname)
+            let mut file = axfs::api::File::open(fname)
                 .map_err(|_| axio::Error::NotFound)?;
-            let n = (&file).read(buf)?;
+            let n = file.read(buf)?;
             Ok(n)
         }
     }
