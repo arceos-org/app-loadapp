@@ -27,8 +27,8 @@ fn main() {
 
         let worker1 = thread::spawn(move || {
             println!("worker1 checks code: ");
-            for i in 0..8 {
-                print!("{:#x} ", buf[i]);
+            for b in buf.iter().take(8) {
+                print!("{:#x} ", b);
             }
             println!("\nworker1 ok!");
         });
