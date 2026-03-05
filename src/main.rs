@@ -40,8 +40,7 @@ fn main() {
 
         fn load_app(fname: &str, buf: &mut [u8]) -> Result<usize, axio::Error> {
             println!("fname: {}", fname);
-            let mut file = axfs::api::File::open(fname)
-                .map_err(|_| axio::Error::NotFound)?;
+            let mut file = axfs::api::File::open(fname).map_err(|_| axio::Error::NotFound)?;
             let n = file.read(buf)?;
             Ok(n)
         }

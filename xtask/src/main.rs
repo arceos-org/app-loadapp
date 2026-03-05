@@ -5,7 +5,10 @@ use std::process::{self, Command};
 
 /// ArceOS loadapp multi-architecture build & run tool
 #[derive(Parser)]
-#[command(name = "xtask", about = "Build and run arceos-loadapp on different architectures")]
+#[command(
+    name = "xtask",
+    about = "Build and run arceos-loadapp on different architectures"
+)]
 struct Cli {
     #[command(subcommand)]
     command: Cmd,
@@ -108,7 +111,11 @@ fn create_fat_disk_image(path: &Path) {
         .truncate(true)
         .open(path)
         .unwrap_or_else(|e| {
-            eprintln!("Error: failed to create disk image {}: {}", path.display(), e);
+            eprintln!(
+                "Error: failed to create disk image {}: {}",
+                path.display(),
+                e
+            );
             process::exit(1);
         });
     file.set_len(DISK_SIZE).unwrap();
